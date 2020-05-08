@@ -1,3 +1,5 @@
+from send_sms import *
+
 def print_message():
     print("I'm sorry, I did not understand your selection. Please enter the corresponding letter for your response.")
 
@@ -135,6 +137,14 @@ def total_amount(donation_choice):
     total = round((subtotal * 1.08) + donation_choice,2)
     return total
 
+def text_message():
+    # if type(phoneNumber is not None:
+    return client.messages.create(
+            body='Your drink is ready. Thank you!',
+            from_=twilioNumber,
+            to=phoneNumber
+            )
+
 def coffee_bot():
     print("Welcome to the cafe!")
     size = get_size()
@@ -155,7 +165,11 @@ def coffee_bot():
     print(f"Did you choose a pastry?: {pastry}")
     print(f"Your total is: ${total}")
     print(f"Thanks, {name}! Your drink will be ready shortly.")
-    
+
+    try:
+        return text_message()
+    except TwilioRestException:
+        pass
 
 coffee_bot()
 
