@@ -1,3 +1,5 @@
+from send_sms import *
+
 # creates a function that displays information when a user doesn't select any of the given options
 def print_message():
     print("I'm sorry, I did not understand your selection. Please enter the corresponding letter for your response.")
@@ -31,7 +33,6 @@ def get_drink_type():
             return order_latte()
         else:
             print_message()
-        
 
 # if the user selects latte, then we will direct them to this function that inquiries about what type of milk they want added!
 def order_latte():
@@ -45,7 +46,6 @@ def order_latte():
             return "soy latte"
         else:
             print_message()
-        
 
 def type_of_cup():
     while True:
@@ -145,6 +145,15 @@ def total_amount(donation_choice):
     total = round((subtotal * 1.08) + donation_choice,2)
     return total
 
+# send SMS to notify customer that their drink is ready
+def text_message():
+    # if type(phoneNumber is not None:
+    return client.messages.create(
+            body='Your drink is ready. Thank you!',
+            from_=twilioNumber,
+            to=phoneNumber
+            )
+
 # this is the main function
 def coffee_bot():
     # This is where the bot makes the introduction and summarizes the order
@@ -169,9 +178,11 @@ def coffee_bot():
     print(f"Did you choose a pastry?: {pastry}")
     print(f"Your total is: ${total}")
     print(f"Thanks, {name}! Your drink will be ready shortly.")
-    
+
+    try:
+        return text_message()
+    except TwilioRestException:
+        pass
 
 coffee_bot()
 
-
- 
