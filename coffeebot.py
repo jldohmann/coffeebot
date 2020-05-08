@@ -184,5 +184,10 @@ def coffee_bot():
     except TwilioRestException:
         pass
 
+    try:
+        return text_message()
+    except TwilioRestException:
+        pass
+
 coffee_bot()
 
