@@ -147,7 +147,6 @@ def total_amount(donation_choice):
 
 # send SMS to notify customer that their drink is ready
 def text_message():
-    # if type(phoneNumber is not None:
     return client.messages.create(
             body='Your drink is ready. Thank you!',
             from_=twilioNumber,
